@@ -417,18 +417,51 @@ export default function CrowdfundingPage() {
                 </div>
               </Card>
 
-              {/* Token Display */}
-              <TokenBalanceDisplay 
-                tokenSymbol={campaign.tokenSymbol}
-                lastContribution={lastContribution}
-              />
-
-              {/* Smart Contract Info */}
+              {/* Blockchain Demo */}
               <BlockchainDemo 
                 contractAddress={campaign.contractAddress}
                 networkName={campaign.networkName}
                 verified={true}
               />
+
+              {/* Token Balance */}
+              <TokenBalanceDisplay 
+                tokenSymbol={campaign.tokenSymbol}
+                lastContribution={lastContribution}
+              />
+
+              {/* Dynamic Tokens */}
+              <DynamicTokens
+                tokenSymbol={campaign.tokenSymbol}
+                currentPrice={tokenPrice}
+                onPurchase={() => handlePledge(tokenPrice.toString(), "dynamic-tokens")}
+                purchaseHistory={tokensPurchased}
+              />
+
+              {/* About Project */}
+              <Card className="mb-6">
+                <div className="p-6">
+                  <h2 className="font-heading text-xl font-semibold mb-4">Sobre o Projeto</h2>
+                  <p className="text-gray-700 mb-4">
+                    TourChain é uma plataforma <strong>100% web3</strong> que revoluciona as viagens corporativas com tecnologia blockchain, algoritmos de bem-estar e contratos inteligentes para garantir sustentabilidade.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    Desenvolvemos uma solução descentralizada baseada em ESG (Environmental Virtual Machine) que elimina intermediários, tornando as transações mais transparentes e eficientes. Com nosso protocolo exclusivo e tecnologia ERC-4337 para facilitar a integração de usuários web2 com web3, estamos criando capacidades excepcionais comerciais para qualquer player do mercado de viagens.
+                  </p>
+                  
+                  <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <i className="fas fa-database text-blue-500 mt-1"></i>
+                      <div>
+                        <h3 className="font-medium text-blue-900">Tecnologia Oracle</h3>
+                        <p className="text-sm text-blue-800">
+                          Utilizamos oracle para criar dados off-chain como uma maneira de tratar seus erros tecnologia blockchain, garantindo segurança e confiabilidade nos registros.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
             </div>
 
             {/* Rewards Column */}
