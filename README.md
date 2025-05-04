@@ -1,5 +1,5 @@
 
-# TourChain - Plataforma Web3 de Viagens Corporativas
+# CrowdFund Connect - Plataforma Web3 de financeamento coletivo
 
 ## Arquitetura do Sistema
 
