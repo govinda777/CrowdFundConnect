@@ -79,35 +79,22 @@ export function BlockchainProvider({ children }: BlockchainProviderProps) {
   const { toast } = useToast();
   const isDevelopment = true;  // Set to true for mock setup
 
-  // Connect wallet function
+  // Simulated wallet connection
   const connectWallet = async () => {
-    // Check if window.ethereum exists
-    if (typeof window !== 'undefined' && 'ethereum' in window) {
-      try {
-        // @ts-ignore - ethereum is injected by MetaMask
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        if (accounts.length > 0) {
-          setWalletAddress(accounts[0]);
-          setIsWalletConnected(true);
-          return;
-        }
-      } catch (error) {
-        console.error('Error connecting to MetaMask:', error);
-      }
-    }
+    // Simulate a brief loading time
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // If no wallet or error, use mock wallet for development
-    if (isDevelopment) {
-      const mockAddress = '0x1234567890123456789012345678901234567890';
-      setWalletAddress(mockAddress);
-      setIsWalletConnected(true);
-    } else {
-      toast({
-        title: "No Web3 Wallet Detected",
-        description: "Please install MetaMask or another Web3 wallet to connect.",
-        variant: "destructive"
-      });
-    }
+    // Generate a random wallet address for simulation
+    const mockAddress = '0x' + Array.from({length: 40}, () => 
+      Math.floor(Math.random() * 16).toString(16)).join('');
+    
+    setWalletAddress(mockAddress);
+    setIsWalletConnected(true);
+    
+    toast({
+      title: "Carteira Conectada",
+      description: "Conexão simulada estabelecida com sucesso.",
+    });
   };
 
   // Implement tour crowdfunding functionality
