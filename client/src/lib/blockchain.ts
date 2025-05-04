@@ -77,24 +77,62 @@ export function BlockchainProvider({ children }: BlockchainProviderProps) {
   const [walletAddress, setWalletAddress] = useState<string>('');
   const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false);
   const { toast } = useToast();
-  const isDevelopment = true;  // Set to true for mock setup
+  const mumbaiConfig = {
+  chainId: "0x13881", // 80001 in decimal
+  chainName: "Polygon Mumbai",
+  nativeCurrency: {
+    name: "MATIC",
+    symbol: "MATIC",
+    decimals: 18
+  },
+  rpcUrls: ["https://rpc-mumbai.maticvigil.com"],
+  blockExplorerUrls: ["https://mumbai.polygonscan.com"]
+};
+
+const isDevelopment = false;
 
   // Simulated wallet connection
   const connectWallet = async () => {
-    // Simulate a brief loading time
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Generate a random wallet address for simulation
-    const mockAddress = '0x' + Array.from({length: 40}, () => 
-      Math.floor(Math.random() * 16).toString(16)).join('');
-    
-    setWalletAddress(mockAddress);
-    setIsWalletConnected(true);
-    
-    toast({
-      title: "Carteira Conectada",
-      description: "Conexão simulada estabelecida com sucesso.",
-    });
+    try {
+      if (!window.ethereum) {
+        toast({
+          title: "MetaMask não encontrada",
+          description: "Por favor instale a MetaMask para continuar.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Solicitar acesso à carteira
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      
+      // Adicionar rede Mumbai
+      await window.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [mumbaiConfig],
+      });
+
+      // Mudar para rede Mumbai
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: mumbaiConfig.chainId }],
+      });
+
+      setWalletAddress(accounts[0]);
+      setIsWalletConnected(true);
+      
+      toast({
+        title: "Carteira Conectada",
+        description: "Conectado à rede Polygon Mumbai com sucesso!",
+      });
+    } catch (error) {
+      console.error("Erro ao conectar carteira:", error);
+      toast({
+        title: "Erro na Conexão",
+        description: "Não foi possível conectar à carteira.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Implement tour crowdfunding functionality
