@@ -92,6 +92,51 @@ export function BlockchainProvider({ children }: BlockchainProviderProps) {
 const isDevelopment = false;
 
   // Simulated wallet connection
+  // Detectar mudanças de conta
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts: string[]) => {
+        if (accounts.length > 0) {
+          setWalletAddress(accounts[0]);
+        } else {
+          setWalletAddress('');
+          setIsWalletConnected(false);
+        }
+      });
+
+      window.ethereum.on('chainChanged', () => {
+        window.location.reload();
+      });
+    }
+  }, []);
+
+  const checkNetwork = async () => {
+    try {
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      if (chainId !== mumbaiConfig.chainId) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: mumbaiConfig.chainId }],
+          });
+        } catch (switchError: any) {
+          if (switchError.code === 4902) {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [mumbaiConfig],
+            });
+          } else {
+            throw switchError;
+          }
+        }
+      }
+      return true;
+    } catch (error) {
+      console.error('Error checking network:', error);
+      return false;
+    }
+  };
+
   const connectWallet = async () => {
     try {
       if (!window.ethereum) {
@@ -100,24 +145,21 @@ const isDevelopment = false;
           description: "Por favor instale a MetaMask para continuar.",
           variant: "destructive"
         });
+        window.open('https://metamask.io/download/', '_blank');
         return;
       }
 
-      // Solicitar acesso à carteira
+      const networkOk = await checkNetwork();
+      if (!networkOk) {
+        toast({
+          title: "Erro de Rede",
+          description: "Por favor, conecte-se à rede Polygon Mumbai",
+          variant: "destructive"
+        });
+        return;
+      }
+
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      
-      // Adicionar rede Mumbai
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [mumbaiConfig],
-      });
-
-      // Mudar para rede Mumbai
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: mumbaiConfig.chainId }],
-      });
-
       setWalletAddress(accounts[0]);
       setIsWalletConnected(true);
       
@@ -125,11 +167,11 @@ const isDevelopment = false;
         title: "Carteira Conectada",
         description: "Conectado à rede Polygon Mumbai com sucesso!",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao conectar carteira:", error);
       toast({
         title: "Erro na Conexão",
-        description: "Não foi possível conectar à carteira.",
+        description: error.message || "Não foi possível conectar à carteira.",
         variant: "destructive"
       });
     }
