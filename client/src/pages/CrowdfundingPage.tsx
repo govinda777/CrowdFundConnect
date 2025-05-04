@@ -23,6 +23,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TokenBalanceDisplay from "@/components/TokenBalanceDisplay";
 import BlockchainDemo from "@/components/BlockchainDemo";
+import DynamicTokens from "@/components/DynamicTokens";
 import { formatCurrency } from "@/lib/utils";
 
 export default function CrowdfundingPage() {
