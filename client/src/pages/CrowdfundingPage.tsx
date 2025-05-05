@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { useBlockchain, useTourCrowdfunding } from "@/lib/blockchain";
+import { useBlockchain, useCrowdfunding } from "@/lib/blockchain";
 import {
   Dialog, 
   DialogContent, 
@@ -66,17 +66,17 @@ export default function CrowdfundingPage() {
   }, []);
   
   // Use crowdfunding hook
-  const { getCampaign, getCampaignRewards, pledge, isLoading: isLoadingCampaign, isProcessing } = useTourCrowdfunding();
+  const { getCampaign, getCampaignRewards, pledge, isLoading: isLoadingCampaign, isProcessing } = useCrowdFundConnectCrowdfunding();
   
   // State to store campaign data
   const [campaign, setCampaign] = useState({
-    title: "TourChain: Revolução nas Viagens Corporativas",
+    title: "CrowdFundConnectChain: Revolução nas Viagens Corporativas",
     description: "Ajude a construir o futuro das viagens corporativas com blockchain, bem-estar e sustentabilidade.",
     goal: 100000,
     raised: 67500,
     backers: 285,
     daysLeft: 18,
-    tokenSymbol: "TOUR",
+    tokenSymbol: "CFC",
     contractAddress: "0x7Da37534E347561BEfC711F1a0dCFcb70735F268",
     networkName: "Ethereum (Sepolia Testnet)",
     featuredImage: "bg-gradient-to-r from-primary to-secondary"
@@ -146,7 +146,7 @@ export default function CrowdfundingPage() {
       title: "Acesso Antecipado",
       amount: 250,
       tokenAmount: 500,
-      description: "Seja um dos primeiros a utilizar a plataforma TourChain com acesso prioritário e suporte VIP por 3 meses.",
+      description: "Seja um dos primeiros a utilizar a plataforma CrowdFundConnectChain com acesso prioritário e suporte VIP por 3 meses.",
       claimed: 87,
       limit: 150,
       contractId: "0x001"
@@ -249,7 +249,7 @@ export default function CrowdfundingPage() {
           rewardId,
           name || "Anonymous",
           email || "",
-          "Via TourChain Web App",
+          "Via CrowdFundConnectChain Web App",
           name ? false : true // Is anonymous if no name
         );
         
@@ -387,13 +387,13 @@ export default function CrowdfundingPage() {
                 <div className="p-6">
                   <h2 className="font-heading text-xl font-semibold mb-4">Sobre o Projeto</h2>
                   <p className="text-gray-700 mb-4">
-                    O TourChain está revolucionando o mercado de viagens corporativas ao integrar tecnologia blockchain, 
+                    O CrowdFundConnectChain está revolucionando o mercado de viagens corporativas ao integrar tecnologia blockchain, 
                     foco em bem-estar e práticas sustentáveis. Nossa plataforma permite que empresas gerenciem viagens 
                     corporativas de forma transparente, eficiente e com redução de custos significativa.
                   </p>
                   <p className="text-gray-700 mb-4">
                     Ao utilizar smart contracts, garantimos que todas as transações sejam seguras e transparentes, 
-                    eliminando intermediários e reduzindo custos. Nossos tokens TOUR não apenas facilitam pagamentos, 
+                    eliminando intermediários e reduzindo custos. Nossos tokens CrowdFundConnect não apenas facilitam pagamentos, 
                     mas também incentivam escolhas sustentáveis e promovem o bem-estar dos viajantes.
                   </p>
                   
@@ -444,7 +444,7 @@ export default function CrowdfundingPage() {
                 <div className="p-6">
                   <h2 className="font-heading text-xl font-semibold mb-4">Sobre o Projeto</h2>
                   <p className="text-gray-700 mb-4">
-                    TourChain é uma plataforma <strong>100% web3</strong> que revoluciona as viagens corporativas com tecnologia blockchain, algoritmos de bem-estar e contratos inteligentes para garantir sustentabilidade.
+                    CrowdFundConnectChain é uma plataforma <strong>100% web3</strong> que revoluciona as viagens corporativas com tecnologia blockchain, algoritmos de bem-estar e contratos inteligentes para garantir sustentabilidade.
                   </p>
                   <p className="text-gray-700 mb-4">
                     Desenvolvemos uma solução descentralizada baseada em ESG (Environmental Virtual Machine) que elimina intermediários, tornando as transações mais transparentes e eficientes. Com nosso protocolo exclusivo e tecnologia ERC-4337 para facilitar a integração de usuários web2 com web3, estamos criando capacidades excepcionais comerciais para qualquer player do mercado de viagens.

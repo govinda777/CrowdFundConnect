@@ -4,7 +4,7 @@ export default function ProjectsSection() {
   const projects = [
     {
       id: 1,
-      title: "TourChain: Revolução nas Viagens Corporativas",
+      title: "CrowdFundConnect: Revolução nas Viagens Corporativas",
       description: "Transformando viagens corporativas com blockchain, bem-estar e sustentabilidade",
       raised: 67500,
       goal: 100000,

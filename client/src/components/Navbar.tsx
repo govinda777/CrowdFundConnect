@@ -14,7 +14,7 @@ export default function Navbar() {
             <Link to="/">
               <div className="flex-shrink-0 flex items-center cursor-pointer">
                 <div className="h-8 w-8 bg-gradient-to-r from-primary to-secondary rounded-md"></div>
-                <span className="ml-2 text-xl font-heading font-semibold">TourChain</span>
+                <span className="ml-2 text-xl font-heading font-semibold">CrowdFundConnect</span>
               </div>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

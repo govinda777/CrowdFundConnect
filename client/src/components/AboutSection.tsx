@@ -8,7 +8,7 @@ export default function AboutSection() {
             Uma nova forma de financiar inovação
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            TourChain Connect é uma plataforma de crowdfunding descentralizada que conecta viajantes, empresas 
+            CrowdFundConnectChain Connect é uma plataforma de crowdfunding descentralizada que conecta viajantes, empresas 
             e investidores para financiar o futuro das viagens corporativas.
           </p>
         </div>

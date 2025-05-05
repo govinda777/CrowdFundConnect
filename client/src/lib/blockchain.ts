@@ -26,7 +26,7 @@ export interface Campaign {
   isActive: boolean;
 }
 
-interface TourCrowdfundingContextType {
+interface CrowdfundingContextType {
   getCampaign: (id: number) => Promise<Campaign | null>;
   getCampaignRewards: (id: number) => Promise<any[]>;
   pledge: (
@@ -51,7 +51,7 @@ const BlockchainContext = createContext<BlockchainContextType>({
 });
 
 // Create crowdfunding context
-const TourCrowdfundingContext = createContext<TourCrowdfundingContextType>({
+const CrowdfundingContext = createContext<CrowdfundingContextType>({
   getCampaign: async () => null,
   getCampaignRewards: async () => [],
   pledge: async () => false,
@@ -62,7 +62,7 @@ const TourCrowdfundingContext = createContext<TourCrowdfundingContextType>({
 // Mock data for demonstration purposes
 const mockCampaign: Campaign = {
   id: 1,
-  title: "TourChain: Revolução nas Viagens Corporativas",
+  title: "CrowdFundConnectChain: Revolução nas Viagens Corporativas",
   description: "Ajude a construir o futuro das viagens corporativas com blockchain, bem-estar e sustentabilidade.",
   fundingGoal: "100000000000000000000000", // 100,000 in wei
   raisedAmount: "67500000000000000000000", // 67,500 in wei
@@ -177,7 +177,7 @@ const isDevelopment = false;
     }
   };
 
-  // Implement tour crowdfunding functionality
+  // Implement CrowdFundConnect crowdfunding functionality
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
@@ -247,8 +247,8 @@ const isDevelopment = false;
     }
   };
 
-  // TourCrowdfunding context value
-  const tourCrowdfundingValue = {
+  // CrowdFundConnectCrowdfunding context value
+  const CrowdfundingValue = {
     getCampaign,
     getCampaignRewards,
     pledge,
@@ -260,7 +260,7 @@ const isDevelopment = false;
   
   return (
     React.createElement(BlockchainContext.Provider, { value: blockchainValue },
-      React.createElement(TourCrowdfundingContext.Provider, { value: tourCrowdfundingValue },
+      React.createElement(CrowdfundingContext.Provider, { value: CrowdfundingValue },
         children
       )
     )
@@ -269,4 +269,4 @@ const isDevelopment = false;
 
 // Hooks to use the contexts
 export const useBlockchain = () => useContext(BlockchainContext);
-export const useTourCrowdfunding = () => useContext(TourCrowdfundingContext);
+export const useCrowdfunding = () => useContext(CrowdfundingContext);

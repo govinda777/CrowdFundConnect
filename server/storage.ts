@@ -69,18 +69,18 @@ export class MemStorage implements IStorage {
     };
     const user = this.createUser(demoUser);
     
-    // Create TourChain project
-    const tourProject: InsertProject = {
-      title: "TourChain: Revolução nas Viagens Corporativas",
+    // Create CrowdFundConnectChain project
+    const CrowdFundConnectProject: InsertProject = {
+      title: "CrowdFundConnectChain: Revolução nas Viagens Corporativas",
       description: "Ajude a construir o futuro das viagens corporativas com blockchain, bem-estar e sustentabilidade.",
       goal: 10000000, // $100,000 in cents
       deadline: new Date(Date.now() + 18 * 24 * 60 * 60 * 1000), // 18 days from now
-      tokenSymbol: "TOUR",
+      tokenSymbol: "CFC",
       contractAddress: "0x7Da37534E347561BEfC711F1a0dCFcb70735F268",
       networkName: "Ethereum (Sepolia Testnet)",
       createdBy: user.id
     };
-    const project = this.createProject(tourProject);
+    const project = this.createProject(CrowdFundConnectProject);
     
     // Set raised amount and backers for demo
     this.projects.set(project.id, {
@@ -105,7 +105,7 @@ export class MemStorage implements IStorage {
       {
         projectId: project.id,
         title: "Acesso Antecipado",
-        description: "Seja um dos primeiros a utilizar a plataforma TourChain com acesso prioritário e suporte VIP por 3 meses.",
+        description: "Seja um dos primeiros a utilizar a plataforma CrowdFundConnectChain com acesso prioritário e suporte VIP por 3 meses.",
         amount: 25000, // $250 in cents
         tokenAmount: 500,
         limit: 150,

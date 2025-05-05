@@ -9,7 +9,7 @@ interface TokenBalanceDisplayProps {
 }
 
 export default function TokenBalanceDisplay({ 
-  tokenSymbol = "TOUR", 
+  tokenSymbol = "CFC", 
   lastContribution = "" 
 }: TokenBalanceDisplayProps) {
   const [userTokens, setUserTokens] = useState(0);
